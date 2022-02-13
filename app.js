@@ -34,11 +34,6 @@ client.on('ready', () => {
 client.on('message', (msg) => {
   if (msg.content === '!joke')
     msg.reply(jokes[Math.floor(Math.random() * jokes.length)]);
-  if (msg.content === '!mod') {
-    msg.member.roles.add('786492152485117962');
-    msg.react('?');
-    msg.reply('You are a MOD now');
-  }
 });
 
 client.login(process.env.DJS_TOKEN);
