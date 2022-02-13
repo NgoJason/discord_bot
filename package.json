@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/NgoJason/testbot/issues"
   },
-  "homepage": "https://github.com/NgoJason/testbot#readme"
+  "homepage": "https://github.com/NgoJason/testbot#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0"
+  }
 }
