@@ -1,21 +1,23 @@
 {
-  "name": "argobot",
+  "name": "testbot",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "engines": {
+    "node": "12.11.1"
+  },
   "scripts": {
     "start": "node app.js"
- },
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NgoJason/argobot.git"
+    "url": "git+https://github.com/NgoJason/testbot.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NgoJason/argobot/issues"
+    "url": "https://github.com/NgoJason/testbot/issues"
   },
-  "homepage": "https://github.com/NgoJason/argobot#readme"
+  "homepage": "https://github.com/NgoJason/testbot#readme"
 }
-
-
