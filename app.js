@@ -1,7 +1,7 @@
 
 const Discord = require('discord.js');
 const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES"]});
-require('dotenv').config();
+//require('dotenv').config();
 
 // Jokes
 const jokes = [
@@ -41,4 +41,4 @@ client.on('message', (msg) => {
   }
 });
 
-client.login(process.env.BOT_TOKEN);
+client.login(process.env.DJS_TOKEN);
