@@ -51,7 +51,7 @@ client.on('message', (msg) => {
       .then(response => {
         const movieEmbed = new MessageEmbed()
         .setColor('#FF0000')
-        .setTitle('Top 5 shows')
+        .setTitle('Top 5 movies')
         .addFields(
           { name: "1. " + response.data.items[0]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[0]['imDbRating'] },
           { name: "2. " +response.data.items[1]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[1]['imDbRating'] },
