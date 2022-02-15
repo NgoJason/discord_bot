@@ -1,5 +1,6 @@
 
 const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES"]});
 //require('dotenv').config();
 const axios = require('axios');
@@ -18,12 +19,18 @@ client.on('message', (msg) => {
     axios
       .get(show_URL)
       .then(response => {
-        msg.reply("The top 5 shows are: " + response.data.items[0]['title'] + ",   "
-        + response.data.items[1]['title'] + ",   "
-        + response.data.items[2]['title'] + ",   "
-        + response.data.items[3]['title'] + ",   "
-        + response.data.items[4]['title']
-        );
+        const showEmbed = new MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle('Top 5 shows')
+        .addFields(
+          { name: "1. " + response.data.items[0]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[0]['imDbRating'] },
+          { name: "2. " +response.data.items[1]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[1]['imDbRating'] },
+          { name: "3. " +response.data.items[2]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[2]['imDbRating'] },
+          { name: "4. " +response.data.items[3]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[3]['imDbRating'] },
+          { name: "5. " +response.data.items[4]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[4]['imDbRating'] },
+        )
+        .setTimestamp()
+        msg.reply({ embeds: [showEmbed] });
       })
       .catch(error => {
         console.log(error);
@@ -32,12 +39,18 @@ client.on('message', (msg) => {
       axios
       .get(movies_URL)
       .then(response => {
-        msg.reply("The top 5 movies are: " + response.data.items[0]['title'] + ",   "
-        + response.data.items[1]['title'] + ",   "
-        + response.data.items[2]['title'] + ",   "
-        + response.data.items[3]['title'] + ",   "
-        + response.data.items[4]['title'] 
-        );
+        const movieEmbed = new MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle('Top 5 shows')
+        .addFields(
+          { name: "1. " + response.data.items[0]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[0]['imDbRating'] },
+          { name: "2. " +response.data.items[1]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[1]['imDbRating'] },
+          { name: "3. " +response.data.items[2]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[2]['imDbRating'] },
+          { name: "4. " +response.data.items[3]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[3]['imDbRating'] },
+          { name: "5. " +response.data.items[4]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[4]['imDbRating'] },
+        )
+        .setTimestamp()
+        msg.reply({ embeds: [movieEmbed] });
       })
       .catch(error => {
         console.log(error);
