@@ -12,7 +12,17 @@ client.on('ready', () => {
   console.log('Bot is ready');
 });
 
-//set a time to run every 10am Saturday and Wednesday
+//set a time to run every 4 days = 3450 * 100000
+//{"id":"tt9288030","rank":"1","rankUpDown":"+7","title":"Reacher","fullTitle":"Reacher (2022)","year":"2022","image":"https://m.media-amazon.com/images/M/MV5BNzQ4MGYzYzAtNjJlOC00NTdkLTlmNTAtMmZjMzZmZTg2YTEzXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_UX128_CR0,3,128,176_AL_.jpg","crew":"Alan Ritchson, Malcolm Goodwin","imDbRating":"8.4","imDbRatingCount":"44910"}
+
+// This will be repeated 5 times with 1 second intervals:
+// setIntervalX(function () {
+//   msg.reply("Hi")
+// }, 10000, 3);
+
+// var channel = client.channels.get('gambling-den', nameOfChannel);
+// client.sendMessage(channel, "test") 
+
 
 client.on('message', (msg) => {
   if (msg.content === '!shows')
@@ -56,5 +66,4 @@ client.on('message', (msg) => {
         console.log(error);
       });
 });
-
 client.login(process.env.DJS_TOKEN);
