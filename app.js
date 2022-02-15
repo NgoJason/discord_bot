@@ -25,7 +25,7 @@ client.on('ready', () => {
 
 
 client.on('message', (msg) => {
-  if (msg.content === '!shows')
+  if (msg.content === '!shows' || msg.content === "!show")
     axios
       .get(show_URL)
       .then(response => {
@@ -45,12 +45,12 @@ client.on('message', (msg) => {
       .catch(error => {
         console.log(error);
       });
-    else if (msg.content === "!movies")
+    else if (msg.content === "!movies" || msg.content === "!movie" )
       axios
       .get(movies_URL)
       .then(response => {
         const movieEmbed = new MessageEmbed()
-        .setColor('#0099ff')
+        .setColor('#FF0000')
         .setTitle('Top 5 shows')
         .addFields(
           { name: "1. " + response.data.items[0]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[0]['imDbRating'] },
