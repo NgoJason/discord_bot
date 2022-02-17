@@ -25,6 +25,8 @@ client.on('ready', () => {
 
 
 client.on('message', (msg) => {
+  if (msg.content === '!crypto')
+    msg.reply("hi");
   if (msg.content === '!shows' || msg.content === "!show")
     axios
       .get(show_URL)
