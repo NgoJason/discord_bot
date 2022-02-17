@@ -25,7 +25,13 @@ client.on('ready', () => {
 
 
 client.on('message', (msg) => {
-  if (msg.content === '!shows' || msg.content === "!show")
+  if (msg.content === '!crypto')
+    msg.reply("hi");
+      })
+    .catch(error => {
+        console.log(error);
+      });
+  else if (msg.content === '!shows' || msg.content === "!show")
     axios
       .get(show_URL)
       .then(response => {
@@ -66,13 +72,6 @@ client.on('message', (msg) => {
         console.log(error);
       });
 
-      client.on('message', (msg) => {
-        if (msg.content === '!crypto')
-              msg.reply("hello");
-            })
-            .catch(error => {
-              console.log(error);
-            });
 
 });
 client.login(process.env.DJS_TOKEN);
