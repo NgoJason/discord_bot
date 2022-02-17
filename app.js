@@ -4,10 +4,10 @@ const { MessageEmbed } = require('discord.js');
 const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES"]});
 //require('dotenv').config();
 const axios = require('axios');
-// set url as constant
+// API endpoints
 const show_URL = "https://imdb-api.com/en/API/MostPopularTVs/" + process.env.IMDB_TOKEN
 const movies_URL = "https://imdb-api.com/en/API/MostPopularMovies/" + process.env.IMDB_TOKEN
-
+const coinmarketcap_URL = 
 client.on('ready', () => {
   console.log('Bot is ready');
 });
@@ -23,10 +23,36 @@ client.on('ready', () => {
 // var channel = client.channels.get('gambling-den', nameOfChannel);
 // client.sendMessage(channel, "test") 
 
+function cryptocall(){
+  let response = null;
+  new Promise(async (resolve, reject) => {
+    try {
+      response = await axios.get('https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=BTC', {
+        headers: {
+          'Accepts': 'application/json',
+          'X-CMC_PRO_API_KEY': '3898d099-a274-42d8-8248-a04de26090f5'
+        },
+      });
+    } catch(ex) {
+      response = null;
+      // error
+      console.log(ex);
+      reject(ex);
+    }
+    if (response) {
+      // success
+      const json = response.data;
+      msg.reply(json.data['BTC'][0].quote.USD.price);
+      resolve(json);
+    }
+  });
+
+
+}
 
 client.on('message', (msg) => {
   if (msg.content === '!crypto')
-    msg.reply("hi");
+    cryptocall()
   if (msg.content === '!shows' || msg.content === "!show")
     axios
       .get(show_URL)
