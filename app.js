@@ -65,5 +65,14 @@ client.on('message', (msg) => {
       .catch(error => {
         console.log(error);
       });
+
+      client.on('message', (msg) => {
+        if (msg.content === '!crypto')
+              msg.reply("hello");
+            })
+            .catch(error => {
+              console.log(error);
+            });
+
 });
 client.login(process.env.DJS_TOKEN);
