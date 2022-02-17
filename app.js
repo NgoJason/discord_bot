@@ -7,7 +7,7 @@ const axios = require('axios');
 // API endpoints
 const show_URL = "https://imdb-api.com/en/API/MostPopularTVs/" + process.env.IMDB_TOKEN
 const movies_URL = "https://imdb-api.com/en/API/MostPopularMovies/" + process.env.IMDB_TOKEN
-const coinmarketcap_URL = 
+const coinmarketcap_URL = "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=BTC"
 client.on('ready', () => {
   console.log('Bot is ready');
 });
@@ -50,9 +50,25 @@ function cryptocall(){
 
 }
 
+cryptocall()
+
+
 client.on('message', (msg) => {
   if (msg.content === '!crypto')
-    cryptocall()
+    axios
+      .get(coinmarketcap_URL, {
+        headers: {
+          'Accepts': 'application/json',
+          'X-CMC_PRO_API_KEY': '3898d099-a274-42d8-8248-a04de26090f5'
+        },
+      })
+      .then(response => {
+        const json = response.data;
+        msg.reply(json.data['BTC'][0].quote.USD.price)
+      })
+      .catch(error => {
+        console.log(error);
+      });
   if (msg.content === '!shows' || msg.content === "!show")
     axios
       .get(show_URL)
