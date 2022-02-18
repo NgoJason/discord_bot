@@ -50,6 +50,7 @@ client.on('message', (msg) => {
           { name: "5. " +response.data.items[4]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[4]['imDbRating'] },
         )
         .setTimestamp()
+        .setFooter({ text: 'Try doing !help for more info or complain to me, Jason!', iconURL: 'https://i.imgur.com/WWmAV5s.jpg' });
         msg.reply({ embeds: [showEmbed] });
       })
       .catch(error => {
@@ -70,6 +71,7 @@ client.on('message', (msg) => {
           { name: "5. " +response.data.items[4]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[4]['imDbRating'] },
         )
         .setTimestamp()
+        .setFooter({ text: 'Try doing !help for more info or complain to me, Jason!', iconURL: 'https://i.imgur.com/WWmAV5s.jpg' });
         msg.reply({ embeds: [movieEmbed] });
       })
       .catch(error => {
