@@ -7,7 +7,7 @@ const axios = require('axios');
 // API endpoints
 const show_URL = "https://imdb-api.com/en/API/MostPopularTVs/" + process.env.IMDB_TOKEN
 const movies_URL = "https://imdb-api.com/en/API/MostPopularMovies/" + process.env.IMDB_TOKEN
-
+const cmc_URL = "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol="
 
 client.on('ready', () => {
   console.log('Bot is ready');
@@ -29,7 +29,7 @@ client.on('message', (msg) => {
     msg.reply("Hi, try doing !shows or !movies");
   if (msg.content === '!btc')
     axios
-      .get("https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=BTC", {headers: {'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY},})
+      .get(cmc_URL + "BTC", {headers: {'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY},})
       .then(response => {
         const json = response.data;
         const btc_price = json.data['BTC'][0].quote.USD.price
