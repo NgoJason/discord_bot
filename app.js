@@ -7,7 +7,8 @@ const axios = require('axios');
 // API endpoints
 const show_URL = "https://imdb-api.com/en/API/MostPopularTVs/" + process.env.IMDB_TOKEN
 const movies_URL = "https://imdb-api.com/en/API/MostPopularMovies/" + process.env.IMDB_TOKEN
-const coinmarketcap_URL = "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=BTC"
+
+
 client.on('ready', () => {
   console.log('Bot is ready');
 });
@@ -23,50 +24,17 @@ client.on('ready', () => {
 // var channel = client.channels.get('gambling-den', nameOfChannel);
 // client.sendMessage(channel, "test") 
 
-// function cryptocall(){
-//   let response = null;
-//   new Promise(async (resolve, reject) => {
-//     try {
-//       response = await axios.get('https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=BTC', {
-//         headers: {
-//           'Accepts': 'application/json',
-//           'X-CMC_PRO_API_KEY': '3898d099-a274-42d8-8248-a04de26090f5'
-//         },
-//       });
-//     } catch(ex) {
-//       response = null;
-//       // error
-//       console.log(ex);
-//       reject(ex);
-//     }
-//     if (response) {
-//       // success
-//       const json = response.data;
-//       console.log(json.data['BTC'][0].quote.USD.price);
-//       resolve(json);
-//     }
-//   });
-// }
-
-//cryptocall()
-
-
 client.on('message', (msg) => {
-  if (msg.content === '!crypto')
+  if (msg.content === '!help')
+    msg.reply("Hi, try doing !shows or !movies");
+  if (msg.content === '!btc')
     axios
-      .get(coinmarketcap_URL, {
-        headers: {
-          'Accepts': 'application/json',
-          'X-CMC_PRO_API_KEY': '3898d099-a274-42d8-8248-a04de26090f5'
-        },
-      })
+      .get("https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=BTC", {headers: {'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY},})
       .then(response => {
         const json = response.data;
-        msg.reply(json.data['BTC'][0].quote.USD.price)
-      })
-      .catch(error => {
-        console.log(error);
-      });
+        const btc_price = json.data['BTC'][0].quote.USD.price
+        msg.reply(String(btc_price));
+  })
   if (msg.content === '!shows' || msg.content === "!show")
     axios
       .get(show_URL)
@@ -108,4 +76,5 @@ client.on('message', (msg) => {
         console.log(error);
       });
 });
+
 client.login(process.env.DJS_TOKEN);
