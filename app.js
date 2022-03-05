@@ -27,6 +27,16 @@ client.on('ready', () => {
 client.on('message', (msg) => {
   if (msg.content === '!help')
     msg.reply("Hi, try doing !shows or !movies");
+  if (msg.content === '!stream')
+    msg.reply("USE PROPER ADBLOCKER (ublock origin, ...)
+-> https://ufcstream.me/ufc-streams
+-> https://v2.sportsurge.net/list-mma
+http://bestsolaris.com/category/mmastreams/
+http://buffstream.io/mma-buff
+https://720pstream.tv/mma-stream
+https://crackstreams.me/mmacrackedstreams
+http://live.worldcupfootball.me/ufc-stream
+for RECAPS you can go to: https://www.mma-core.com/")
   if (msg.content === '!btc')
     axios
       .get(cmc_URL + "BTC", {headers: {'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY},})
