@@ -32,6 +32,8 @@ http://live.worldcupfootball.me/ufc-stream
 for RECAPS you can go to: https://www.mma-core.com/")
 */
 client.on('message', (msg) => {
+  if (msg.content === '!bothelp')
+    msg.reply("to stop Jason's bot use jail and to start it use start_bot");
   if (msg.content === '!help')
     msg.reply("Hi, try doing !shows or !movies");
   if (msg.content === '!stream')
