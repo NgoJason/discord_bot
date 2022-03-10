@@ -25,6 +25,12 @@ client.on('ready', () => {
 // client.sendMessage(channel, "test") 
 
 client.on('message', (msg) => {
+  if (msg.content === '!bothelp')
+  msg.reply("to stop Jason's bot use jail and to start it use start_bot");
+  if (msg.content === '!help')
+    msg.reply("Hi, try doing !shows or !movies");
+  if (msg.content === '!stream')
+    msg.reply("https://ufcstream.me/ufc-streams   https://v2.sportsurge.net/list-mma")
   if (msg.content === '!help')
     msg.reply("Hi, try doing !shows or !movies");
   if (msg.content === '!btc')
@@ -37,7 +43,7 @@ client.on('message', (msg) => {
         .setColor('#0099ff')
         .setTitle('Latest Cryptocurrency Prices')
         .addFields(
-          { name: "Bitcoin Price " + string(json.data['BTC'][0].quote.USD.price) },
+          { name: "Bitcoin Price " + string(json.data['BTC'][0].quote.USD.price },
         )
         .setTimestamp()
         .setFooter({ text: 'Try doing !help for more info or complain to me, Jason!', iconURL: 'https://i.imgur.com/WWmAV5s.jpg' });
