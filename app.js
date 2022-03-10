@@ -33,7 +33,15 @@ client.on('message', (msg) => {
       .then(response => {
         const json = response.data;
         const btc_price = json.data['BTC'][0].quote.USD.price
-        msg.reply(String(btc_price));
+        const btcEmbed = new MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle('Latest Cryptocurrency Prices')
+        .addFields(
+          { name: "Bitcoin Price " + string(json.data['BTC'][0].quote.USD.price) },
+        )
+        .setTimestamp()
+        .setFooter({ text: 'Try doing !help for more info or complain to me, Jason!', iconURL: 'https://i.imgur.com/WWmAV5s.jpg' });
+        msg.reply({ embeds: [showEmbed] });
   })
   if (msg.content === '!shows' || msg.content === "!show")
     axios
