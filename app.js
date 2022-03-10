@@ -31,23 +31,14 @@ client.on('message', (msg) => {
     msg.reply("Hi, try doing !shows or !movies");
   if (msg.content === '!stream')
     msg.reply("https://ufcstream.me/ufc-streams   https://v2.sportsurge.net/list-mma")
-  if (msg.content === '!help')
-    msg.reply("Hi, try doing !shows or !movies");
   if (msg.content === '!btc')
     axios
       .get(cmc_URL + "BTC", {headers: {'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY},})
       .then(response => {
         const json = response.data;
-        const btc_price = json.data['BTC'][0].quote.USD.price
-        const btcEmbed = new MessageEmbed()
-        .setColor('#0099ff')
-        .setTitle('Latest Cryptocurrency Prices')
-        .addFields(
-          { name: "Bitcoin Price " + String(btc_price) },
-        )
-        .setTimestamp()
-        .setFooter({ text: 'Try doing !help for more info or complain to me, Jason!', iconURL: 'https://i.imgur.com/WWmAV5s.jpg' });
-        msg.reply({ embeds: [btcEmbed] });
+        const btc_price = String(json.data['BTC'][0].quote.USD.price)
+
+        msg.reply(btc_price);
   })
   if (msg.content === '!shows' || msg.content === "!show")
     axios
