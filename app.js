@@ -23,22 +23,10 @@ client.on('ready', () => {
 
 // var channel = client.channels.get('gambling-den', nameOfChannel);
 // client.sendMessage(channel, "test") 
-/*
-http://bestsolaris.com/category/mmastreams/
-http://buffstream.io/mma-buff
-https://720pstream.tv/mma-stream
-https://crackstreams.me/mmacrackedstreams
-http://live.worldcupfootball.me/ufc-stream
-for RECAPS you can go to: https://www.mma-core.com/")
-*/
+
 client.on('message', (msg) => {
-  if (msg.content === '!bothelp')
-    msg.reply("to stop Jason's bot use jail and to start it use start_bot");
   if (msg.content === '!help')
     msg.reply("Hi, try doing !shows or !movies");
-  if (msg.content === '!stream')
-    msg.reply("https://ufcstream.me/ufc-streams,https://v2.sportsurge.net/list-mma")
-
   if (msg.content === '!btc')
     axios
       .get(cmc_URL + "BTC", {headers: {'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY},})
