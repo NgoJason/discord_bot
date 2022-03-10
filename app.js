@@ -43,11 +43,11 @@ client.on('message', (msg) => {
         .setColor('#0099ff')
         .setTitle('Latest Cryptocurrency Prices')
         .addFields(
-          { name: "Bitcoin Price " + string(json.data['BTC'][0].quote.USD.price },
+          { name: "Bitcoin Price " + String(btc_price) },
         )
         .setTimestamp()
         .setFooter({ text: 'Try doing !help for more info or complain to me, Jason!', iconURL: 'https://i.imgur.com/WWmAV5s.jpg' });
-        msg.reply({ embeds: [showEmbed] });
+        msg.reply({ embeds: [btcEmbed] });
   })
   if (msg.content === '!shows' || msg.content === "!show")
     axios
