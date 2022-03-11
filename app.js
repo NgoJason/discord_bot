@@ -43,6 +43,7 @@ client.on('message', (msg) => {
       { name: "UTC (London)", value: calcTime('London/UTC', '0') },
       { name: "New York EST", value: calcTime('New York', '-5') },
       { name: "Houston CST", value: calcTime('Houston', '-6') },
+      { name: "Los Angeles PST", value: calcTime('LA', '-8') },
     )
     msg.reply({ embeds: [timeEmbed] });
   };
