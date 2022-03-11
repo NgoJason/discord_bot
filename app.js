@@ -13,6 +13,8 @@ client.on('ready', () => {
   console.log('Bot is ready');
 });
 
+
+
 // calculate time
 function calcTime(city, offset) {
   d = new Date();
@@ -24,7 +26,7 @@ function calcTime(city, offset) {
 
 client.on('message', (msg) => {
 
-  if (msg.content === '!time' || msg.content === '!utc') {
+  if (msg.content === '!time' || msg.content === '!timez') {
     const timeEmbed = new MessageEmbed()
       .setColor('#0099ff')
       .setTitle('Time Zones')
