@@ -40,10 +40,11 @@ client.on('message', (msg) => {
       )
       .setFooter({ text: 'Try doing !help for a list of commands' });
     msg.reply({ embeds: [timeEmbed] });
-  };
-  if (msg.content === '!bothelp')
+  }
+  else if (msg.content === '!bothelp') {
     msg.reply("to stop Jason's bot use jail and to start it use start_bot");
-  if (msg.content === '!help') {
+  }
+  else if (msg.content === '!help') {
     const helpEmbed = new MessageEmbed()
       .setColor('#0099ff')
       .setTitle('Time Zones')
@@ -56,7 +57,7 @@ client.on('message', (msg) => {
       )
     msg.reply({ embeds: [helpEmbed] });
   }
-  if (msg.content === '!stream') {
+  else if (msg.content === '!stream') {
     const streamsEmbed = new MessageEmbed()
       .setColor('#0099ff')
       .setTitle('MMA Streams')
@@ -66,7 +67,7 @@ client.on('message', (msg) => {
       .setFooter({ text: 'Try doing !help for a list of commands' });
     msg.reply({ embeds: [streamsEmbed] });
   }
-  if (msg.content === '!btc')
+  else if (msg.content === '!btc')
     axios
       .get(cmc_URL + "BTC", { headers: { 'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY }, })
       .then(response => {
@@ -74,7 +75,7 @@ client.on('message', (msg) => {
         const btc_price = String(Math.round(json.data['BTC'][0].quote.USD.price * 100) / 100)
         msg.reply("$" + btc_price);
       })
-  if (msg.content === '!shows' || msg.content === "!show")
+  else if (msg.content === '!shows' || msg.content === "!show")
     axios
       .get(show_URL)
       .then(response => {
