@@ -13,17 +13,6 @@ client.on('ready', () => {
   console.log('Bot is ready');
 });
 
-//set a time to run every 4 days = 3450 * 100000
-//{"id":"tt9288030","rank":"1","rankUpDown":"+7","title":"Reacher","fullTitle":"Reacher (2022)","year":"2022","image":"https://m.media-amazon.com/images/M/MV5BNzQ4MGYzYzAtNjJlOC00NTdkLTlmNTAtMmZjMzZmZTg2YTEzXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_UX128_CR0,3,128,176_AL_.jpg","crew":"Alan Ritchson, Malcolm Goodwin","imDbRating":"8.4","imDbRatingCount":"44910"}
-
-// This will be repeated 5 times with 1 second intervals:
-// setIntervalX(function () {
-//   msg.reply("Hi")
-// }, 10000, 3);
-
-// var channel = client.channels.get('gambling-den', nameOfChannel);
-// client.sendMessage(channel, "test") 
-
 // calculate time
 function calcTime(city, offset) {
   d = new Date();
@@ -47,6 +36,7 @@ client.on('message', (msg) => {
         { name: "Singapore", value: calcTime('SG', '+8') },
         { name: "Tallinn", value: calcTime('Estonia', '+2') },
       )
+      .setFooter({ text: 'Try doing !help for a list of commands' });
     msg.reply({ embeds: [timeEmbed] });
   };
   if (msg.content === '!bothelp')
@@ -71,6 +61,7 @@ client.on('message', (msg) => {
       .addFields(
         { name: "List of Streams", value: 'https://ufcstream.me/ufc-streams  https://v2.sportsurge.net/list-mma http://bestsolaris.com/category/mmastreams http://buffstream.io/mma-buff https://720pstream.tv/mma-stream https://crackstreams.me/mmacrackedstreams http://live.worldcupfootball.me/ufc-stream' }
       )
+      .setFooter({ text: 'Try doing !help for a list of commands' });
     msg.reply({ embeds: [streamsEmbed] });
   }
   if (msg.content === '!btc')
@@ -96,7 +87,7 @@ client.on('message', (msg) => {
             { name: "5. " + response.data.items[4]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[4]['imDbRating'] },
           )
           .setTimestamp()
-          .setFooter({ text: 'Try doing !help for more info or complain to me, Jason!', iconURL: 'https://i.imgur.com/WWmAV5s.jpg' });
+          .setFooter({ text: 'Try doing !help for a list of commands' });
         msg.reply({ embeds: [showEmbed] });
       })
       .catch(error => {
@@ -117,7 +108,7 @@ client.on('message', (msg) => {
             { name: "5. " + response.data.items[4]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[4]['imDbRating'] },
           )
           .setTimestamp()
-          .setFooter({ text: 'Try doing !help for more info or complain to me, Jason!', iconURL: 'https://i.imgur.com/WWmAV5s.jpg' });
+          .setFooter({ text: 'Try doing !help for a list of commands' });
         msg.reply({ embeds: [movieEmbed] });
       })
       .catch(error => {
