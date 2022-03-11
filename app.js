@@ -35,7 +35,7 @@ function calcTime(city, offset) {
 
 client.on('message', (msg) => {
 
-  if (msg.content === '!time' || msg.content === '!utc' ) {
+  if (msg.content === '!time' || msg.content === '!utc') {
     const timeEmbed = new MessageEmbed()
       .setColor('#0099ff')
       .setTitle('Time Zones')
@@ -64,15 +64,21 @@ client.on('message', (msg) => {
       )
     msg.reply({ embeds: [helpEmbed] });
   }
-  if (msg.content === '!stream')
-    msg.reply("https://ufcstream.me/ufc-streams   https://v2.sportsurge.net/list-mma")
+  if (msg.content === '!stream') {
+    const streamsEmbed = new MessageEmbed()
+      .setColor('#0099ff')
+      .setTitle('MMA Streams')
+      .addFields(
+        { name: "List of Streams", value: 'https://ufcstream.me/ufc-streams  https://v2.sportsurge.net/list-mma http://bestsolaris.com/category/mmastreams http://buffstream.io/mma-buff https://720pstream.tv/mma-stream https://crackstreams.me/mmacrackedstreams http://live.worldcupfootball.me/ufc-stream' }
+      )
+    msg.reply({ embeds: [streamsEmbed] });
+  }
   if (msg.content === '!btc')
     axios
       .get(cmc_URL + "BTC", { headers: { 'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY }, })
       .then(response => {
         const json = response.data;
         const btc_price = String(json.data['BTC'][0].quote.USD.price)
-
         msg.reply(btc_price);
       })
   if (msg.content === '!shows' || msg.content === "!show")
