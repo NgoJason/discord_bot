@@ -26,7 +26,7 @@ function calcTime(city, offset) {
 
 client.on('message', (msg) => {
 
-  if (msg.content === '!time' || msg.content === '!timezs') {
+  if (msg.content === '!time' || msg.content === '!utc') {
     const timeEmbed = new MessageEmbed()
       .setColor('#0099ff')
       .setTitle('Time Zones')
