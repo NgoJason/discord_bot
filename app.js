@@ -44,6 +44,8 @@ client.on('message', (msg) => {
       { name: "New York EST", value: calcTime('New York', '-5') },
       { name: "Houston CST", value: calcTime('Houston', '-6') },
       { name: "Los Angeles PST", value: calcTime('LA', '-8') },
+      { name: "Singapore", value: calcTime('SG', '+8') },
+      { name: "Tallinn", value: calcTime('Estonia', '+2') },
     )
     msg.reply({ embeds: [timeEmbed] });
   };
