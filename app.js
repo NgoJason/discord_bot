@@ -24,11 +24,35 @@ client.on('ready', () => {
 // var channel = client.channels.get('gambling-den', nameOfChannel);
 // client.sendMessage(channel, "test") 
 
+// calculate time
+function calcTime(city, offset) {
+  d = new Date();
+  utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+  nd = new Date(utc + (3600000*offset));
+  return "The local time in " + city + " is " + nd.toLocaleString();
+}
+
+
 client.on('message', (msg) => {
+  if  (msg.content === '!time') {
+    msg.reply(calcTime('London/UTC', '0'))
+  }
   if (msg.content === '!bothelp')
   msg.reply("to stop Jason's bot use jail and to start it use start_bot");
-  if (msg.content === '!help')
-    msg.reply("Hi, try doing !shows or !movies");
+  if (msg.content === '!help') {
+    let helpEmbed = new MessageEmbed()
+    .setColor('#0099ff')
+    .setTitle('Commands')
+    .addFields(
+      { name: "!btc to get current price of Bitcoin"  },
+      { name: "!time to get current UTC time"  },
+      { name: "!shows to get Top 5 shows on IMDB"  },
+      { name: "!movies to get Top 5 movies on IMDB"  },
+      { name: "!stream to get links to MMA streams"  },
+    )
+    .setTimestamp()
+    msg.reply({ embeds: [helpEmbed] });
+  }
   if (msg.content === '!stream')
     msg.reply("https://ufcstream.me/ufc-streams   https://v2.sportsurge.net/list-mma")
   if (msg.content === '!btc')
