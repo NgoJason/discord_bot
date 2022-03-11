@@ -78,8 +78,8 @@ client.on('message', (msg) => {
       .get(cmc_URL + "BTC", { headers: { 'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY }, })
       .then(response => {
         const json = response.data;
-        const btc_price = String(json.data['BTC'][0].quote.USD.price)
-        msg.reply(btc_price);
+        const btc_price = String(Math.round(json.data['BTC'][0].quote.USD.price * 100) / 100)
+        msg.reply("$" + btc_price);
       })
   if (msg.content === '!shows' || msg.content === "!show")
     axios
