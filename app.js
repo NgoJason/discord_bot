@@ -1,7 +1,7 @@
 
 const Discord = require('discord.js');
 const { MessageEmbed } = require('discord.js');
-const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
+const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES"]});
 //require('dotenv').config();
 const axios = require('axios');
 // API endpoints
@@ -24,77 +24,85 @@ client.on('ready', () => {
 // var channel = client.channels.get('gambling-den', nameOfChannel);
 // client.sendMessage(channel, "test") 
 
+// calculate time
+function calcTime(city, offset) {
+  d = new Date();
+  utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+  nd = new Date(utc + (3600000*offset));
+  return "The local time in " + city + " is " + nd.toLocaleString();
+}
+
+
 client.on('message', (msg) => {
 
-  if (msg.content === '!time') {
+  if  (msg.content === '!time') {
     const timeEmbed = new MessageEmbed()
-      .setColor('#0099ff')
-      .setTitle('Time Zones')
-      .addFields(
-        { name: "UTC (London)", value: calcTime('London/UTC', '0') },
-        { name: "New York EST", value: calcTime('New York', '-5') },
-        { name: "Houston CST", value: calcTime('Houston', '-6') },
-      )
+    .setColor('#0099ff')
+    .setTitle('Time Zones')
+    .addFields(
+      { name: "UTC (London)", value: calcTime('London/UTC', '0') },
+      { name: "New York EST", value: calcTime('New York', '-5') },
+      { name: "Houston CST", value: calcTime('Houston', '-6') },
+    )
     msg.reply({ embeds: [timeEmbed] });
-  }
-});
-if (msg.content === '!bothelp')
+  };
+  if (msg.content === '!bothelp')
   msg.reply("to stop Jason's bot use jail and to start it use start_bot");
-if (msg.content === '!help')
-  msg.reply("Hi, try doing !shows or !movies");
-if (msg.content === '!stream')
-  msg.reply("https://ufcstream.me/ufc-streams   https://v2.sportsurge.net/list-mma")
-if (msg.content === '!btc')
-  axios
-    .get(cmc_URL + "BTC", { headers: { 'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY }, })
-    .then(response => {
-      const json = response.data;
-      const btc_price = String(json.data['BTC'][0].quote.USD.price)
+  if (msg.content === '!help')
+    msg.reply("Hi, try doing !shows or !movies");
+  if (msg.content === '!stream')
+    msg.reply("https://ufcstream.me/ufc-streams   https://v2.sportsurge.net/list-mma")
+  if (msg.content === '!btc')
+    axios
+      .get(cmc_URL + "BTC", {headers: {'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY},})
+      .then(response => {
+        const json = response.data;
+        const btc_price = String(json.data['BTC'][0].quote.USD.price)
 
-      msg.reply(btc_price);
-    })
-if (msg.content === '!shows' || msg.content === "!show")
-  axios
-    .get(show_URL)
-    .then(response => {
-      const showEmbed = new MessageEmbed()
+        msg.reply(btc_price);
+  })
+  if (msg.content === '!shows' || msg.content === "!show")
+    axios
+      .get(show_URL)
+      .then(response => {
+        const showEmbed = new MessageEmbed()
         .setColor('#0099ff')
         .setTitle('Top 5 shows')
         .addFields(
           { name: "1. " + response.data.items[0]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[0]['imDbRating'] },
-          { name: "2. " + response.data.items[1]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[1]['imDbRating'] },
-          { name: "3. " + response.data.items[2]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[2]['imDbRating'] },
-          { name: "4. " + response.data.items[3]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[3]['imDbRating'] },
-          { name: "5. " + response.data.items[4]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[4]['imDbRating'] },
+          { name: "2. " +response.data.items[1]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[1]['imDbRating'] },
+          { name: "3. " +response.data.items[2]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[2]['imDbRating'] },
+          { name: "4. " +response.data.items[3]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[3]['imDbRating'] },
+          { name: "5. " +response.data.items[4]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[4]['imDbRating'] },
         )
         .setTimestamp()
         .setFooter({ text: 'Try doing !help for more info or complain to me, Jason!', iconURL: 'https://i.imgur.com/WWmAV5s.jpg' });
-      msg.reply({ embeds: [showEmbed] });
-    })
-    .catch(error => {
-      console.log(error);
-    });
-else if (msg.content === "!movies" || msg.content === "!movie")
-  axios
-    .get(movies_URL)
-    .then(response => {
-      const movieEmbed = new MessageEmbed()
+        msg.reply({ embeds: [showEmbed] });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    else if (msg.content === "!movies" || msg.content === "!movie" )
+      axios
+      .get(movies_URL)
+      .then(response => {
+        const movieEmbed = new MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Top 5 movies')
         .addFields(
           { name: "1. " + response.data.items[0]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[0]['imDbRating'] },
-          { name: "2. " + response.data.items[1]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[1]['imDbRating'] },
-          { name: "3. " + response.data.items[2]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[2]['imDbRating'] },
-          { name: "4. " + response.data.items[3]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[3]['imDbRating'] },
-          { name: "5. " + response.data.items[4]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[4]['imDbRating'] },
+          { name: "2. " +response.data.items[1]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[1]['imDbRating'] },
+          { name: "3. " +response.data.items[2]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[2]['imDbRating'] },
+          { name: "4. " +response.data.items[3]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[3]['imDbRating'] },
+          { name: "5. " +response.data.items[4]['fullTitle'], value: 'IMDB Rating: ' + response.data.items[4]['imDbRating'] },
         )
         .setTimestamp()
         .setFooter({ text: 'Try doing !help for more info or complain to me, Jason!', iconURL: 'https://i.imgur.com/WWmAV5s.jpg' });
-      msg.reply({ embeds: [movieEmbed] });
-    })
-    .catch(error => {
-      console.log(error);
-    });
+        msg.reply({ embeds: [movieEmbed] });
+      })
+      .catch(error => {
+        console.log(error);
+      });
 });
 
 client.login(process.env.DJS_TOKEN);
