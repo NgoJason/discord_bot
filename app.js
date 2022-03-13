@@ -1,4 +1,4 @@
-
+pr
 const Discord = require('discord.js');
 const { MessageEmbed } = require('discord.js');
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
@@ -32,9 +32,9 @@ client.on('message', (msg) => {
       .setTitle('Time Zones')
       .addFields(
         { name: "UTC (London)", value: calcTime('London/UTC', '0') },
-        { name: "New York EST", value: calcTime('New York', '-5') },
-        { name: "Houston CST", value: calcTime('Houston', '-6') },
-        { name: "Los Angeles PST", value: calcTime('LA', '-8') },
+        { name: "New York EST", value: calcTime('New York', '-4') },
+        { name: "Houston CST", value: calcTime('Houston', '-5') },
+        { name: "Los Angeles PST", value: calcTime('LA', '-7') },
         { name: "Singapore", value: calcTime('SG', '+8') },
         { name: "Tallinn", value: calcTime('Estonia', '+2') },
       )
